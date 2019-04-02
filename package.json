@@ -16,5 +16,9 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0"
+  },
+  "dependencies": {
+    "loudness": "^0.3.0",
+    "play-sound": "^1.1.3"
   }
 }
