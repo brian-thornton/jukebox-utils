@@ -23,18 +23,7 @@ player.play(tracks[0]);
 
 setTimeout(function () {
   console.log('here');
-  volume.increaseVolume();
+  player.stop();
 
-}, 10000)
+}, 10000);
 
-setTimeout(function () {
-  console.log('here');
-  volume.toggleMute();
-
-}, 20000)
-
-setTimeout(function () {
-  console.log('here');
-  volume.toggleMute();
-
-}, 30000)

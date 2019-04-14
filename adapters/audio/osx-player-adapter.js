@@ -1,8 +1,16 @@
 const audioAdapter = require('play-sound')({});
 
 class OSXPlayerAdapter {
-  static play(track) {
-    audioAdapter.play(track);
+  constructor() {
+    this.audio = {};
+  }
+
+  play(track) {
+    this.audio = audioAdapter.play(track);
+  }
+
+  stop() {
+    this.audio.kill();
   }
 }
 module.exports = OSXPlayerAdapter;
