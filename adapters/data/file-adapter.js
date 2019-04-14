@@ -13,7 +13,11 @@ class FileAdapter {
   }
 
   get(type, id) {
-    return JSON.parse(fs.readFileSync(path.join(this.storageLocation, type, `${id}.json`)));
+    try {
+      return JSON.parse(fs.readFileSync(path.join(this.storageLocation, type, `${id}.json`)));
+    } catch (err) {
+      return {};
+    }
   }
 
   getAll(type) {
