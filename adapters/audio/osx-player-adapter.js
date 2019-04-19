@@ -18,8 +18,8 @@ class OSXPlayerAdapter {
   }
 
   isPlaying() {
-    if ('killed' in this.audio) {
-      return !this.audio.killed;
+    if ('exitCode' in this.audio) {
+      return this.audio.exitCode == null;
     }
     return false;
   }
