@@ -18,7 +18,7 @@ class OSXPlayerAdapter {
   }
 
   isPlaying() {
-    if ('exitCode' in this.audio) {
+    if (this.audio && 'exitCode' in this.audio) {
       return this.audio.exitCode == null;
     }
     return false;
