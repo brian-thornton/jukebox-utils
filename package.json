@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "loudness": "^0.3.0",
+    "node-fetch": "^2.6.0",
+    "node-spotify-api": "^1.1.1",
     "play-sound": "^1.1.3"
   }
 }
