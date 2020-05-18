@@ -5,6 +5,7 @@ const Volume = require('./lib/volume');
 const Queue = require('./lib/queue');
 const ListKeeper = require('./lib/list-keeper');
 const Spotify = require('./lib/spotify');
+const Settings = require('./lib/settings');
 
 module.exports = {
   dataAccess: DataAccess,
@@ -13,7 +14,8 @@ module.exports = {
   volume: Volume,
   queue: Queue,
   listKeeper: ListKeeper,
-  spotify: Spotify
+  spotify: Spotify,
+  settings: Settings
 };
 
 // lint
