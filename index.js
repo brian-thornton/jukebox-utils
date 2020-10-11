@@ -6,6 +6,7 @@ const Queue = require('./lib/queue');
 const ListKeeper = require('./lib/list-keeper');
 const Spotify = require('./lib/spotify');
 const Settings = require('./lib/settings');
+const Status = require('./lib/status');
 
 module.exports = {
   dataAccess: DataAccess,
@@ -15,7 +16,8 @@ module.exports = {
   queue: Queue,
   listKeeper: ListKeeper,
   spotify: Spotify,
-  settings: Settings
+  settings: Settings,
+  status: Status,
 };
 
 // lint
