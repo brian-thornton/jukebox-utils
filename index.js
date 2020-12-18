@@ -7,6 +7,7 @@ const ListKeeper = require('./lib/list-keeper');
 const Spotify = require('./lib/spotify');
 const Settings = require('./lib/settings');
 const Status = require('./lib/status');
+const StyleManager = require('./lib/style-manager');
 
 module.exports = {
   dataAccess: DataAccess,
@@ -18,6 +19,7 @@ module.exports = {
   spotify: Spotify,
   settings: Settings,
   status: Status,
+  styleManager: StyleManager,
 };
 
 // lint
