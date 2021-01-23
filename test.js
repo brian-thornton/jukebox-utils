@@ -22,7 +22,6 @@ console.log(tracks);
 player.play(tracks[0]);
 
 setTimeout(function () {
-  console.log('here');
   player.stop();
 
 }, 10000);

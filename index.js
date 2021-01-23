@@ -10,8 +10,8 @@ const Status = require('./lib/status');
 const StyleManager = require('./lib/style-manager');
 
 module.exports = {
-  dataAccess: DataAccess,
-  librarian: Librarian,
+  DataAccess: DataAccess,
+  Librarian: Librarian,
   player: Player,
   volume: Volume,
   queue: Queue,
@@ -22,5 +22,3 @@ module.exports = {
   styleManager: StyleManager,
 };
 
-// lint
-// ./node_modules/.bin/eslint
