@@ -1,5 +1,6 @@
 const DataAccess = require('./lib/data-access');
 const Librarian = require('./lib/librarian');
+const Lighting = require('./lib/lighting');
 const Player = require('./lib/player');
 const Volume = require('./lib/volume');
 const Queue = require('./lib/queue');
@@ -20,5 +21,6 @@ module.exports = {
   settings: Settings,
   status: Status,
   styleManager: StyleManager,
+  lighting: Lighting,
 };
 
