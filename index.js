@@ -9,6 +9,7 @@ const Spotify = require('./lib/spotify');
 const Settings = require('./lib/settings');
 const Status = require('./lib/status');
 const StyleManager = require('./lib/style-manager');
+const Radio = require('./lib/radio');
 
 module.exports = {
   DataAccess: DataAccess,
@@ -22,5 +23,6 @@ module.exports = {
   status: Status,
   styleManager: StyleManager,
   lighting: Lighting,
+  radio: Radio,
 };
 

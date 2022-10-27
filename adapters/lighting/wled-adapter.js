@@ -2,6 +2,19 @@ const fetch = require('node-fetch');
 const find = require('local-devices');
 
 class WLEDAdapter {
+  async fetchWithTimeout(resource, options = {}) {
+    const { timeout = 8000 } = options;
+    
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    const response = await fetch(resource, {
+      ...options,
+      signal: controller.signal  
+    });
+    clearTimeout(id);
+    return response;
+  }
+
   postParams(body) {
     return {
       method: 'post',
@@ -67,7 +80,7 @@ class WLEDAdapter {
     const status = await this.getStatus(ip);
 
     const newSegment = {
-      "id": Math.max.apply(Math, status.state.seg.map(function(o) { return o.id; })) + 1,
+      "id": Math.max.apply(Math, status.state.seg.map(function (o) { return o.id; })) + 1,
       "start": parseInt(start),
       "stop": parseInt(stop),
       "grp": 1,
@@ -102,22 +115,22 @@ class WLEDAdapter {
       const deleteTarget = status.state.seg.find((s) => s.start.toString() === start && s.stop.toString() === stop);
       deleteTarget.start = 10;
       deleteTarget.stop = 9;
-  
+
       const response = await this.post(`http://${ip}/json/state`, {
         "seg": status.state.seg
       });
-  
+
       return response;
     } else {
       // We are dealing with the last segment. It cannot be deleted.
       const deleteTarget = status.state.seg[0];
       deleteTarget.start = 0;
       deleteTarget.stop = 1;
-  
+
       const response = await this.post(`http://${ip}/json/state`, {
         "seg": status.state.seg
       });
-  
+
       return response;
     }
   };
@@ -197,27 +210,35 @@ class WLEDAdapter {
     const status = await this.getData(`http://${ip}/json`);
 
     // First shut down segments that do not apply to this event.
-    status.state.seg.map((s) => {
+    status?.state?.seg?.map((s) => {
       s.off = true;
       s.on = false;
       s.bri = 0;
     });
 
-    for (const eventSegment of eventSegments) {
-      const segment = status.state.seg.find((s) => s.start.toString() === eventSegment.start.toString() && s.stop.toString() === eventSegment.stop.toString());
-      const fxPosition = status.effects.indexOf(eventSegment.effect);
-      const palettePosition = status.palettes.indexOf(eventSegment.palette);
-      segment.fx = fxPosition || 0;
-      segment.pal = palettePosition || 0;
-      segment.on = true;
-      segment.bri = 255;
+    if (status?.state?.seg?.length) {
+      for (const eventSegment of eventSegments) {
+        const segment = status.state.seg.find((s) => s.start.toString() === eventSegment.start.toString() && s.stop.toString() === eventSegment.stop.toString());
+        const fxPosition = status.effects.indexOf(eventSegment.effect);
+        const palettePosition = status.palettes.indexOf(eventSegment.palette);
+        if (segment) {
+          segment.fx = fxPosition || 0;
+          segment.pal = palettePosition || 0;
+          segment.on = true;
+          segment.bri = 255;
+        }
+      }
+
+      console.log(status.state.seg);
+
+      const response = await this.post(`http://${ip}/json/state`, {
+        "on": true, "bri": 255, "seg": status.state.seg
+      });
+
+      return response;
+    } else {
+      throw new Error('Something went wrong');
     }
-
-    const response = await this.post(`http://${ip}/json/state`, {
-      "on": true, "bri": 255, "seg": status.state.seg
-    });
-
-    return response;
   };
 }
 
