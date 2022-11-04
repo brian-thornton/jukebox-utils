@@ -14,7 +14,7 @@ class OSXPlayerAdapter {
   }
 
   stop() {
-    this.audio.kill();
+    // this.audio.kill();
   }
 
   isPlaying() {

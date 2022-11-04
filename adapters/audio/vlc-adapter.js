@@ -7,19 +7,18 @@ class VLCAdapter {
 
   play(url) {
     fetch(`http://:jukebox@localhost:8080/requests/status.json?command=in_play&input=${url}`)
-      .then(response => console.log(response));
+      .then(response => console.log(`Started playback of ${url}`));
   };
 
   stop() {
     fetch(`http://:jukebox@localhost:8080/requests/status.json?command=pl_stop`)
-      .then(response => console.log(response));
+      .then(response => console.log('Stopped playback'));
   };
 
   async status() {
     try {
       const data = await fetch(`http://:jukebox@localhost:8080/requests/status.json`)
       const response = await data.json();
-      console.log(response)
       return response;
     } catch {
       console.log('VLC Service Unavailable');

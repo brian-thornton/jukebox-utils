@@ -1,4 +1,3 @@
-const DataAccess = require('./lib/data-access');
 const Librarian = require('./lib/librarian');
 const Lighting = require('./lib/lighting');
 const Player = require('./lib/player');
@@ -10,10 +9,10 @@ const Settings = require('./lib/settings');
 const Status = require('./lib/status');
 const StyleManager = require('./lib/style-manager');
 const Radio = require('./lib/radio');
+const Log = require('./lib/log');
 
 module.exports = {
-  DataAccess: DataAccess,
-  Librarian: Librarian,
+  librarian: Librarian,
   player: Player,
   volume: Volume,
   queue: Queue,
@@ -24,5 +23,5 @@ module.exports = {
   styleManager: StyleManager,
   lighting: Lighting,
   radio: Radio,
+  log: Log,
 };
-

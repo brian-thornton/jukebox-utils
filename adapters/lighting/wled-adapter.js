@@ -1,6 +1,10 @@
 const fetch = require('node-fetch');
 const find = require('local-devices');
 
+const log = require('../../lib/log');
+
+const { logInfo } = log;
+
 class WLEDAdapter {
   async fetchWithTimeout(resource, options = {}) {
     const { timeout = 8000 } = options;
@@ -56,13 +60,13 @@ class WLEDAdapter {
   };
 
   async discover() {
-    console.log('Finding devices on local network...');
+    logInfo('Finding devices on local network...');
     const networkDevices = await find();
     const wledDevices = [];
-    console.log('Checking for WLED...');
+    logInfo('Checking for WLED...');
     for (const device of networkDevices) {
       try {
-        console.log(`Checking ${device.ip}`);
+        logInfo(`Checking ${device.ip}`);
         const response = await this.getStatus(device.ip);
         if (response.state) {
           wledDevices.push(device);
@@ -72,7 +76,7 @@ class WLEDAdapter {
       }
     }
 
-    console.log('WLED Checking complete.');
+    logInfo('WLED Checking complete.');
     return wledDevices;
   };
 
@@ -136,16 +140,14 @@ class WLEDAdapter {
   };
 
   async powerOn(ip) {
-    console.log(`Powering on ${ip}...`);
+    logInfo(`Powering on ${ip}...`);
     const response = await this.post(`http://${ip}/json/state`, { "on": true, "bri": 255 });
-    console.log(response);
     return response;
   };
 
   async powerOff(ip) {
-    console.log(`Powering off ${ip}...`);
+    logInfo(`Powering off ${ip}...`);
     const response = await this.post(`http://${ip}/json/state`, { "on": false, "bri": 255 });
-    console.log(response);
     return response;
   };
 
@@ -175,7 +177,6 @@ class WLEDAdapter {
       "on": true, "bri": 255, "seg": status.state.seg
     });
 
-    console.log(response);
     return response;
   };
 
@@ -202,7 +203,6 @@ class WLEDAdapter {
       "on": true, "bri": 255, "seg": status.state.seg
     });
 
-    console.log(response);
     return response;
   };
 
@@ -228,8 +228,6 @@ class WLEDAdapter {
           segment.bri = 255;
         }
       }
-
-      console.log(status.state.seg);
 
       const response = await this.post(`http://${ip}/json/state`, {
         "on": true, "bri": 255, "seg": status.state.seg
