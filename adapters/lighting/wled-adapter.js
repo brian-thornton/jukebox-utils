@@ -8,12 +8,12 @@ const { logInfo } = log;
 class WLEDAdapter {
   async fetchWithTimeout(resource, options = {}) {
     const { timeout = 8000 } = options;
-    
+
     const controller = new AbortController();
     const id = setTimeout(() => controller.abort(), timeout);
     const response = await fetch(resource, {
       ...options,
-      signal: controller.signal  
+      signal: controller.signal
     });
     clearTimeout(id);
     return response;
@@ -80,6 +80,16 @@ class WLEDAdapter {
     return wledDevices;
   };
 
+  async reset(ip) {
+    console.log('in reset');
+    const status = await this.getStatus(ip);
+
+    for (const seg of status.state.seg) {
+      console.log(`Removing segment from ${ip} start: ${seg.start} stop: ${seg.stop}`);
+      await this.removeSegment(ip, seg.start, seg.stop);
+    }
+  };
+
   async createSegment(ip, start, stop) {
     const status = await this.getStatus(ip);
 
@@ -114,9 +124,11 @@ class WLEDAdapter {
 
   async removeSegment(ip, start, stop) {
     const status = await this.getStatus(ip);
-
+    console.log(status.state.seg)
     if (status.state.seg.length > 1) {
-      const deleteTarget = status.state.seg.find((s) => s.start.toString() === start && s.stop.toString() === stop);
+      console.log(start);
+      console.log(stop);
+      const deleteTarget = status.state.seg.find((s) => s.start.toString() === start.toString() && s.stop.toString() === stop.toString());
       deleteTarget.start = 10;
       deleteTarget.stop = 9;
 

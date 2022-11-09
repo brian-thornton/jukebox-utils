@@ -1,0 +1,19 @@
+{
+  "name": "Cool Blue",
+  "navButtonType": "buttons",
+  "isEditable": false,
+  "headerColor": "linear-gradient(180deg, rgba(12,12,12,1) 0%, rgba(209,207,216,1) 100%",
+  "headerFont": "Metal Mania",
+  "footerColor": "linear-gradient(180deg, rgba(12,12,12,1) 0%, rgba(209,207,216,1) 100%",
+  "fontColor": "#FFFFFF",
+  "fontWeight": "normal",
+  "backgroundColor": "linear-gradient(180deg, rgba(48,5,245,1) 0%, rgba(14,14,14,1) 100%",
+  "popupBackgroundColor": "#48484a",
+  "buttonBackgroundColor": "linear-gradient(180deg, rgba(12,12,12,1) 0%, rgba(209,207,216,1) 100%",
+  "activeButtonColor": "linear-gradient(180deg, rgba(229,228,236,1) 0%, rgba(60,27,228,1) 100%",
+  "buttonFont": "Bebas Neue",
+  "buttonFontColor": "#FFFFFF",
+  "buttonFontWeight": "bold",
+  "trackBackgroundColor": "linear-gradient(180deg, rgba(117,117,119,1) 0%, rgba(12,12,12,1) 100%",
+  "listFont": "Zen Dots"
+}

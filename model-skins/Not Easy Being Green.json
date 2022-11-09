@@ -1,0 +1,18 @@
+{
+  "isEditable": false,
+  "navButtonType": "buttons",
+  "name": "Not Easy Being Green",
+  "headerColor": "linear-gradient(180deg, rgba(175,175,177,1) 0%, rgba(2,2,2,1) 100%",
+  "headerFont": "Bebas Neue",
+  "footerColor": "linear-gradient(180deg, rgba(175,175,177,1) 0%, rgba(2,2,2,1) 100%",
+  "footerFont": "Bebas Neue",
+  "fontColor": "#FFFFFF",
+  "fontWeight": "normal",
+  "backgroundColor": "linear-gradient(180deg, rgba(4,249,19,1) 0%, rgba(7,7,8,1) 100%",
+  "popupBackgroundColor": "#48484a",
+  "buttonBackgroundColor": "transparent",
+  "buttonFont": "Bebas Neue",
+  "buttonFontColor": "#FFFFFF",
+  "buttonFontWeight": "bold",
+  "trackBackgroundColor": "linear-gradient(180deg, rgba(175,175,177,1) 0%, rgba(2,2,2,1) 100%"
+}
