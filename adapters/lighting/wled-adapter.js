@@ -192,7 +192,7 @@ class WLEDAdapter {
     return response;
   };
 
-  async demoEffect(ip, effect, palette, start, end, speed) {
+  async demoEffect(ip, effect, palette, start, end, speed, brightness) {
     const status = await this.getData(`http://${ip}/json`);
     const fxPosition = status.effects.indexOf(effect);
     const palettePosition = status.palettes.indexOf(palette)
@@ -206,15 +206,15 @@ class WLEDAdapter {
     })
 
     const segment = status.state.seg.find((s) => s.start.toString() === start.toString() && s.stop.toString() === end.toString());
-    console.log(segment);
     segment.fx = fxPosition || 0;
     segment.pal = palettePosition || 0;
     segment.on = true;
-    segment.bri = 255;
+    segment.bri = parseInt(brightness, 10);
     segment.sx = parseInt(speed, 10);
+    console.log(segment);
 
     const response = await this.post(`http://${ip}/json/state`, {
-      "on": true, "bri": 255, "seg": status.state.seg
+      "on": true, "seg": status.state.seg
     });
 
     return response;
