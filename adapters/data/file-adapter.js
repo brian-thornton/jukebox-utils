@@ -16,18 +16,31 @@ class FileAdapter {
     try {
       return JSON.parse(fs.readFileSync(path.join(this.storageLocation, type, `${id}.json`)));
     } catch (err) {
+      FileAdapter.createIfNotExists(`${this.storageLocation}/${type}`);
       return {};
     }
   }
 
   getAll(type) {
-    const data = [];
-    const files = fs.readdirSync(path.join(this.storageLocation, type));
-    files.forEach((file) => {
-      data.push(this.get(type, file.replace('.json', '')));
-    });
+    try {
+      const data = [];
+      const files = fs.readdirSync(path.join(this.storageLocation, type));
+      files.forEach((file) => {
+        data.push(this.get(type, file.replace('.json', '')));
+      });
 
-    return data;
+      return data;
+    } catch (e) {
+      FileAdapter.createIfNotExists(`${this.storageLocation}/${type}`);
+
+      const data = [];
+      const files = fs.readdirSync(path.join(this.storageLocation, type));
+      files.forEach((file) => {
+        data.push(this.get(type, file.replace('.json', '')));
+      });
+
+      return data;
+    }
   }
 
   remove(type, id) {
