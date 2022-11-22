@@ -54,6 +54,20 @@ class WLEDAdapter {
     }
   };
 
+  async getPresets(ip) {
+    const response = await this.getData(`http://${ip}/edit?download=presets.json`, { timeout: 400 });
+    return response;
+  }
+
+  async applyPreset(ip, name) {
+    console.log('in apply');
+    const data = await this.getData(`http://${ip}/edit?download=presets.json`, { timeout: 400 });
+    const preset = Object.keys(data).map((key) => data[key]).filter((p) => p.n).find((c) => c.n === name);
+    console.log(preset);
+    const response = await this.post(`http://${ip}/json/state`, preset);
+    return response;
+  }
+
   async getStatus(ip) {
     const response = await this.getData(`http://${ip}/json`, { timeout: 400 });
     return response;
