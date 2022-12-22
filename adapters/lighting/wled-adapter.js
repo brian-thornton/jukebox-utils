@@ -49,7 +49,8 @@ class WLEDAdapter {
     try {
       const json = await response.json();
       return json;
-    } catch {
+    } catch (err) {
+      console.log(err);
       return null;
     }
   };
@@ -60,8 +61,8 @@ class WLEDAdapter {
   }
 
   async applyPreset(ip, name) {
-    console.log('in apply');
-    const data = await this.getData(`http://${ip}/edit?download=presets.json`, { timeout: 400 });
+    console.log(`Applying preset ${name} to ${ip}`);
+    const data = await this.getData(`http://${ip}/edit?download=presets.json`, { timeout: 1000 });
     const preset = Object.keys(data).map((key) => data[key]).filter((p) => p.n).find((c) => c.n === name);
     console.log(preset);
     const response = await this.post(`http://${ip}/json/state`, preset);

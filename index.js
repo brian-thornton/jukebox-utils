@@ -10,6 +10,7 @@ const Status = require('./lib/status');
 const StyleManager = require('./lib/style-manager');
 const Radio = require('./lib/radio');
 const Log = require('./lib/log');
+const Metadata = require('./lib/metadata');
 
 module.exports = {
   librarian: Librarian,
@@ -24,4 +25,5 @@ module.exports = {
   lighting: Lighting,
   radio: Radio,
   log: Log,
+  metadata: Metadata,
 };
