@@ -1,6 +1,6 @@
 {
   "name": "jukebox-utils",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "jukebox-utils",
   "main": "index.js",
   "scripts": {
